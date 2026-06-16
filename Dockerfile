@@ -1,6 +1,10 @@
 FROM php:8.3-cli
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update && apt-get install -y \
+    unzip \
+    zip \
+    libzip-dev \
+    && docker-php-ext-install zip pdo pdo_mysql
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -12,4 +16,4 @@ RUN composer install --no-dev --optimize-autoloader
 
 EXPOSE 10000
 
-CMD php -S 0.0.0.0:${PORT:-10000} -t public
+CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
