@@ -30,17 +30,49 @@ class MarcaVehiculoRepository {
         }
         return $marcas;
     }
-    /*
-    public function create(Local $data) {
+
+    public function existeMarca(string $idMarca) {
         $pdo = $this->conn->connection();
-        $sql = "insert into locales (nombre_local, ubicacion, estado, descripcion) values (:nombre_local, :ubicacion, :estado, :descripcion)";
+        $sql = "SELECT * FROM {$this->table} WHERE IdMarca = :idMarca";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'idMarca' => $idMarca
+        ]);
+        $data = $stmt->fetch();
+        return ($data != null);
+    }
+
+    public function obtenerMarca(string $idMarca) {
+        $pdo = $this->conn->connection();
+        $sql = "SELECT * FROM {$this->table} WHERE IdMarca = :idMarca";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'idMarca' => $idMarca
+        ]);
+        $data = $stmt->fetch();
+        if ($data != null){
+            $marca = new MarcaVehiculoModel(
+                $data['IdMarca'], 
+                $data['DescripMarca'], 
+                $data['PaisMarca'],
+                $data['SitioWebOficial']
+            );
+            return $marca;
+        }else{
+            return null;
+        };
+    }
+    
+    public function agregar(MarcaVehiculoModel $marca) {
+        $pdo = $this->conn->connection();
+        $sql = "INSERT INTO `marcasvehiculos` (`IdMarca`, `DescripMarca`, `PaisMarca`, `SitioWebOficial`) VALUES (:idMarca, :descripMarca, :paisMarca, :sitioWebOficial)";
         $stmt = $pdo->prepare($sql);
         $res = $stmt->execute([
-            'nombre_local' => $data->nombre_local, 
-            'descripcion' => $data->descripcion, 
-            'estado' => $data->estado,
-            'ubicacion' => $data->ubicacion
+            'idMarca' => $marca->IdMarca, 
+            'descripMarca' => $marca->DescripMarca, 
+            'paisMarca' => $marca->PaisMarca,
+            'sitioWebOficial' => $marca->SitioWebOficial
         ]);
         return $res;
-    }*/
+    }
 }

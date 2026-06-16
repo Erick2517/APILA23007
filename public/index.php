@@ -8,6 +8,7 @@ use Slim\Factory\AppFactory;
 use Dotenv\Dotenv;
 
 // Inicializar phpdotenv apuntando a la raíz del proyecto
+// se verifica si no existe para poder cargar variables en render
 if (file_exists(__DIR__ . '/../.env')) {
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();

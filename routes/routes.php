@@ -14,6 +14,8 @@ return function (App $app) {
 
     //rutas de marcas
     $app->get('/marcas', [MarcaVehiculoController::class, 'obtenerTodas']);
+    $app->post('/marcas', [MarcaVehiculoController::class, 'agregar']);
+    $app->get('/marcas/{idMarca}', [MarcaVehiculoController::class, 'obtenerMarca']);
 
 
     //rutas de vehiculos
