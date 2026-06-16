@@ -8,8 +8,10 @@ use Slim\Factory\AppFactory;
 use Dotenv\Dotenv;
 
 // Inicializar phpdotenv apuntando a la raíz del proyecto
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+}
 
 $app = AppFactory::create();
 
