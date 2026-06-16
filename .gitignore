@@ -1,0 +1,8 @@
+.env
+.idea/
+.vscode/
+/coverage/
+/vendor/
+.DS_Store
+Thumbs.db
+
