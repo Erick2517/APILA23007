@@ -6,13 +6,17 @@ use App\Models\MarcaVehiculoModel;
 
 class MarcaVehiculoRepository {
     private $conn;
+
+    private $table = 'marcasvehiculos';
+
     public function __construct() {
         $this->conn = new Database();
     }
 
+
     public function obtenerTodas(): array {
         $pdo = $this->conn->connection();
-        $stmt = $pdo->query('SELECT * FROM MarcasVehiculos');
+        $stmt = $pdo->query('SELECT * FROM '.$this->table);
         $data = $stmt->fetchAll();
         $marcas = [];
         foreach ($data as $row) {
