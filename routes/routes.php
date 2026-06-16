@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\MarcaVehiculoController;
+use App\Controllers\VehiculoController;
 use Slim\App;
 
 return function (App $app) {
@@ -17,7 +18,8 @@ return function (App $app) {
     $app->post('/marcas', [MarcaVehiculoController::class, 'agregar']);
     $app->get('/marcas/{idMarca}', [MarcaVehiculoController::class, 'obtenerMarca']);
 
-
     //rutas de vehiculos
+    $app->get('/vehiculos', [VehiculoController::class, 'obtenerTodos']);
+    $app->post('/vehiculos', [VehiculoController::class, 'agregar']);
     
 };
